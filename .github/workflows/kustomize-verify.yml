@@ -1,0 +1,27 @@
+name: FluxCD - Verify Kustomizations
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  kustomize-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # - name: Install kubectl
+      #   uses: azure/setup-kubectl@v3
+      #   with:
+      #     version: 'latest'
+
+      # - name: Install kustomize
+      #   run: |
+      #     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+      #     sudo mv kustomize /usr/local/bin/
+
+      - name: Verify Kustomizations
+        run: |
+          find . -name 'kustomization.yaml' -print0 | \
+          xargs -0 -I{} \
+          sh -c 'kubectl kustomize $(dirname $1) ' - '{}'

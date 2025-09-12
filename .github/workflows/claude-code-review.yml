@@ -4,9 +4,9 @@ on:
   pull_request:
     types: [opened, synchronize]
   issue_comment:
-    types: [created, updated]
+    types: [created, edited]
   pull_request_review_comment:
-    types: [created, updated]
+    types: [created, edited]
   issues:
     types: [opened, assigned]
   pull_request_review:

@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- .git/info/exclude
+- apps/base/weaveworks-ui
+- apps/dev/weaveworks-ui
+- backup/apps/base/weaveworks-ui
+- backup/apps/dev/weaveworks-ui
+- backup/clusters/dev
+- clusters/dev
+- secret.yaml

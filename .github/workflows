@@ -1,0 +1,32 @@
+name: Connect to Tailscale Tailnet
+
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Tags to apply to the node'
+        required: false
+        default: 'tag:gh-runner-node'
+        type: string
+jobs:
+  tailscale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: ${{ inputs.tags }}
+
+      - name: Verify connection
+        run: tailscale status
+
+      - name: Show IP address
+        run: tailscale ip -4
+
+      - name: Show version
+        run: tailscale version
+
+      - name: Ping test
+        run: ping -c 4 oracle-vm

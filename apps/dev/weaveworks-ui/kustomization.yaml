@@ -6,6 +6,22 @@ namespace: flux-system
 resources:
   - ../../base/weaveworks-ui
 patches:
-  - path: helm-release-values.yaml
-    target:
+  - target:
+      group: helm.toolkit.fluxcd.io
+      version: v2beta1
       kind: HelmRelease
+      name: ww-gitops
+      namespace: flux-system
+    patch: |
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: podinfo
+        namespace: podinfo
+      spec:
+        values:
+          # ref: https://docs.gitops.weaveworks.org/docs/references/helm-reference
+          WEAVE_GITOPS_FEATURE_TELEMETRY: "true"
+          envVars:
+            - name: WEAVE_GITOPS_FEATURE_OIDC_BUTTON_LABEL
+              value: "Login with ACME"

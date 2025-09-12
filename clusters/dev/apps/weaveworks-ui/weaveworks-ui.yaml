@@ -1,5 +1,4 @@
 ---
-# TODO: move this to 'apps' subfolder & move siblings to 'infra' folder
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -10,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./apps/dev
+  path: ./apps/dev/weaveworks-ui
   prune: true
   wait: true
   timeout: 5m0s

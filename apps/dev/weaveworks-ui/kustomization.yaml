@@ -6,6 +6,6 @@ namespace: flux-system
 resources:
   - ../../base/weaveworks-ui
 patches:
-  - path: weaveworks-ui-values.yaml
+  - path: helm-release-values.yaml
     target:
       kind: HelmRelease

@@ -22,10 +22,22 @@ jobs:
   claude-review:
     timeout-minutes: 10
     if: |
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+      (github.actor.login == 'david-shepard' &&
+        github.event_name == 'issue_comment' &&
+        contains(github.event.comment.body, '@claude')) ||
+
+      (github.actor.login == 'david-shepard' &&
+        github.event_name == 'pull_request_review_comment' &&
+        contains(github.event.comment.body, '@claude')) ||
+
+      (github.actor.login == 'david-shepard' &&
+        github.event_name == 'pull_request_review' &&
+        contains(github.event.review.body, '@claude')) ||
+
+      (github.actor.login == 'david-shepard' &&
+        github.event_name == 'issues' &&
+        (contains(github.event.issue.body, '@claude') ||
+         contains(github.event.issue.title, '@claude')))
     # Optional: Filter by PR author
     #   github.event.pull_request.user.login == 'external-contributor' ||
     #   github.event.pull_request.user.login == 'new-developer' ||
@@ -36,7 +48,7 @@ jobs:
       contents: read
       pull-requests: write
       issues: read
-      id-token: write
+      # id-token: write
     
     steps:
       - name: Checkout repository

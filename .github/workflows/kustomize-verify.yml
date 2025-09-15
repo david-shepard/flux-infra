@@ -1,8 +1,11 @@
 name: FluxCD - Verify Kustomizations
 
 on:
+  push:
+    branches: ['main']
   pull_request:
     types: [opened, synchronize]
+    
 jobs:
   kustomize-verify:
     runs-on: ubuntu-latest

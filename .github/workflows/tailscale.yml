@@ -10,7 +10,7 @@ on:
         type: string
 jobs:
   tailscale:
-    if: (github.actor.login == 'david-shepard')
+    if: (github.actor.id == '12449626')
     runs-on: ubuntu-latest
     steps:
       - name: Tailscale

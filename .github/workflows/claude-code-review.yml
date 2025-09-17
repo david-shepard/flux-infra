@@ -33,19 +33,19 @@ jobs:
   claude-review:
     timeout-minutes: 10
     if: |
-      (github.actor.id == '12449626' &&
+      (github.event.comment.user.id == '12449626' &&
         github.event_name == 'issue_comment' &&
         contains(github.event.comment.body, '@claude')) ||
 
-      (github.actor.id == '12449626' &&
+      (github.event.comment.user.id == '12449626' &&
         github.event_name == 'pull_request_review_comment' &&
         contains(github.event.comment.body, '@claude')) ||
 
-      (github.actor.id == '12449626' &&
+      (github.event.comment.user.id == '12449626' &&
         github.event_name == 'pull_request_review' &&
         contains(github.event.review.body, '@claude')) ||
 
-      (github.actor.id == '12449626' &&
+      (github.event.comment.user.id == '12449626' &&
         github.event_name == 'issues' &&
         (contains(github.event.issue.body, '@claude') ||
          contains(github.event.issue.title, '@claude')))

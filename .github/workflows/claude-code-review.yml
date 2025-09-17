@@ -31,6 +31,7 @@ jobs:
       - name: Dump GitHub context
         run: echo '${{ toJSON(github) }}'
   claude-review:
+  
     timeout-minutes: 10
     if: |
       (github.event.comment.user.id == '12449626' &&
@@ -57,9 +58,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      # allow claude to make comments
       pull-requests: write
-      issues: read
-      # id-token: write
+      # oidc flow
+      id-token: write
     
     steps:
       - name: Checkout repository

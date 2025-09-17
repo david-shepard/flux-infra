@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-config
+  namespace: default
+data:
+  APP_ENV: "dev"
+  LOG_LEVEL: "debug"
+  EXAMPLE_FEATURE_FLAG: "true"
+  EXAMPLE_DATABASE_URL: "postgres://devuser:devpass@dev-db:5432/devdb"
+  ACCOUNT_ID: "1234567890"
+  CLUSTER_REGION: "us-east-2"

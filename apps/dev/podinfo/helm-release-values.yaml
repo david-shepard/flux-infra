@@ -4,40 +4,8 @@ metadata:
   name: podinfo
   namespace: flux-system
 spec:
-  interval: 5m
-  chart:
-    spec:
-      chart: podinfo
-      version: ">=1.0.0"
-      sourceRef:
-        kind: HelmRepository
-        name: podinfo
-        namespace: flux-system
-  releaseName: podinfo
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    remediation:
-      retries: 3
-  test:
-    enable: true
-  driftDetection:
-    mode: enabled
-    ignore:
-      # ignore changes to the replicas field
-      # (e.g. if user or HPA scales the deployment)
-    - paths: ["/spec/replicas"]
-      target:
-        kind: Deployment
   values:
     ui:
       color: "#34577c"
-      message: "Hello from ${APP_ENV:=dev} environment"
-      logo: ""
-    # ingress:
-    #   hosts:
-    #     - host: podinfo.dev
-    #       paths:
-    #         - path: /
-    #           pathType: ImplementationSpecific
+      message: "Hello from dev environment"
+    replicaCount: 2

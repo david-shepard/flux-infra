@@ -5,9 +5,10 @@ This repo is used to illustrate a FluxCD-managed, GitOps-based Kubernetes cluste
 ## TODO
 
 - [x] **Add UI [(gimlet/capacitor-ui)]**(https://github.com/gimlet-io/capacitor)
-- [ ] **Implement [podinfo]**(https://github.com/stefanprodan/podinfo) microservice application
+- [x] **Implement [podinfo]**(https://github.com/stefanprodan/podinfo) microservice application
 - [ ] Add Traefik ingress 
-- [ ] Add requesite infrastructure for **Tailscale** [(TailScale Kubernetes operator?)](https://tailscale.com/kb/1236/kubernetes-operator)
+- [x] Add requesite configuration for **Tailscale**
+  - [ ] [TailScale Kubernetes operator?](https://tailscale.com/kb/1236/kubernetes-operator)
 - [ ] **Multi-Environment Support**: Add staging and production overlays
 - [ ] **Secrets Management**: Implement SOPS or External Secrets Operator
 - [ ] **Monitoring Stack**: Deploy Prometheus, Grafana, and AlertManager

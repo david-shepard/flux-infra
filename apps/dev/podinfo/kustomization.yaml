@@ -3,5 +3,16 @@ kind: Kustomization
 namespace: flux-system
 resources:
 - ../../base/podinfo
-patchesStrategicMerge:
-- helm-release-values.yaml
+# patchesStrategicMerge:
+# - helm-release-values.yaml
+patches:
+- target:
+    kind: HelmRelease
+    name: podinfo
+  patch: |-
+    - op: replace
+      path: /spec/values/ui/color
+      value: "#34577c"
+    - op: add
+      path: /spec/values/replicaCount
+      value: 2

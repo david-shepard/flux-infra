@@ -13,6 +13,6 @@ patches:
     - op: replace
       path: /spec/values/ui/color
       value: "#34577c"
-    - op: add
+    - op: replace
       path: /spec/values/replicaCount
-      value: 2
+      value: 3

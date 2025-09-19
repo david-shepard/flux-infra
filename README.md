@@ -4,8 +4,8 @@ This repo is used to illustrate a FluxCD-managed, GitOps-based Kubernetes cluste
 
 ## TODO
 
-- [x] **Add UI [(gimlet/capacitor-ui)]**(https://github.com/gimlet-io/capacitor)
-- [x] **Implement [podinfo]**(https://github.com/stefanprodan/podinfo) microservice application
+- [x] **Add UI [gimlet/capacitor-ui](https://github.com/gimlet-io/capacitor)**
+- [x] **Implement [podinfo](https://github.com/stefanprodan/podinfo)** microservice application
 - [ ] Add Traefik ingress 
 - [x] Add requesite configuration for **Tailscale**
   - [ ] [TailScale Kubernetes operator?](https://tailscale.com/kb/1236/kubernetes-operator)

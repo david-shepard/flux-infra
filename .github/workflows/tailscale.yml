@@ -1,5 +1,4 @@
 name: Connect to Tailscale Tailnet
-
 on:
   workflow_dispatch:
     inputs:
@@ -19,15 +18,11 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
           tags: ${{ inputs.tags }}
-
       - name: Verify connection
         run: tailscale status
-
       - name: Show IP address
         run: tailscale ip -4
-
       - name: Show version
         run: tailscale version
-
       - name: Ping test
         run: ping -c 4 oracle-vm

@@ -1,3 +1,5 @@
 secret*
 backup
 tmp
+.vscode
+.venv

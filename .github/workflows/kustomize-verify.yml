@@ -1,27 +1,17 @@
 name: FluxCD - Verify Kustomizations
-
 on:
   push:
-    branches: ['main']
-  pull_request:
-    types: [opened, synchronize]
-    
+    branches:
+      - main
 jobs:
   kustomize-verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      # - name: Install kubectl
-      #   uses: azure/setup-kubectl@v3
-      #   with:
-      #     version: 'latest'
-
       - name: Install kubeconform
         run: |
           curl -L https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz | tar xvzf - && \
           sudo mv kubeconform /usr/local/bin/kubeconform
-
       - name: Verify Kustomizations
         run: scripts/validate.sh

@@ -34,6 +34,8 @@ jobs:
           flux create kustomization flux-system \
           --source=flux-system \
           --path=./clusters/dev
+      - name: List files
+        run: tree .
       - name: Verify cluster reconciliation
         run: |
           kubectl -n flux-system wait kustomization/flux-system --for=condition=ready --timeout=5m

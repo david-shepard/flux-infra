@@ -91,27 +91,47 @@ This repository implements a **GitOps workflow** where:
 ```
 flux-infra/
 ├── .github/
-│   └── workflows/           # CI/CD automation
-│       ├── kustomize-verify.yml    # Validates Kustomize builds
-│       ├── claude-code-review.yml  # AI-powered code review
-│       └── tailscale.yml          # Tailscale integration workflow
+│   └── workflows/                      # CI/CD automation
+│       ├── claude-code-review.yml      # AI-powered code review
+│       ├── e2e.yaml                    # End-to-end testing workflow
+│       ├── kustomize-verify.yml        # Validates Kustomize builds
+│       └── tailscale.yml               # Tailscale integration workflow
+├── .vscode/
+│   └── settings.json                   # VSCode project settings
 ├── apps/
-│   ├── base/               # Base application configurations
-│   │   └── capacitor-ui/   # Capacitor UI application
-│   │       ├── oci-repository.yaml      # OCI source definition
-│   │       ├── flux-kustomization.yaml  # Flux deployment config
-│   │       └── kustomization.yaml       # Kustomize base config
-│   └── dev/                # Development environment overlays
+│   ├── base/                           # Base application configurations
+│   │   ├── capacitor-ui/               # Capacitor UI application
+│   │   │   ├── flux-kustomization.yaml # Flux deployment config
+│   │   │   ├── kustomization.yaml      # Kustomize base config
+│   │   │   └── oci-repository.yaml     # OCI source definition
+│   │   └── podinfo/                    # Podinfo microservice
+│   │       ├── helm-release.yaml       # Helm release definition
+│   │       ├── helm-repository.yaml    # Helm repository source
+│   │       └── kustomization.yaml      # Kustomize base config
+│   └── dev/                            # Development environment overlays
+│       ├── capacitor-ui/
+│       │   └── kustomization.yaml      # Dev overlay for Capacitor UI
+│       ├── podinfo/
+│       │   ├── helm-release-values.yaml # Dev-specific Helm values
+│       │   └── kustomization.yaml       # Dev overlay for Podinfo
+│       └── kustomization.yaml           # Root dev apps config
 ├── clusters/
-│   └── dev/                # Development cluster configuration
-│       ├── infra/          # Infrastructure components
-│       │   ├── gotk-components.yaml  # Flux core components
-│       │   ├── gotk-sync.yaml       # Git synchronization config
-│       │   └── kustomization.yaml   # Infrastructure orchestration
-│       ├── apps/           # Application deployment configs
-│       └── kustomization.yaml      # Root cluster config
-├── README.md               # This file
-└── .gitignore             # Git ignore patterns
+│   └── dev/                            # Development cluster configuration
+│       ├── apps/                       # Application deployment configs
+│       │   ├── flux-kustomization-apps.yaml # Apps Flux kustomization
+│       │   └── kustomization.yaml      # Apps orchestration
+│       ├── infra/                      # Infrastructure components
+│       │   ├── configmap-env.yaml     # Environment configuration
+│       │   ├── flux-kustomization.yaml # Infrastructure Flux config
+│       │   ├── git-repository.yaml    # Git source definition
+│       │   ├── gotk-components.yaml   # Flux core components
+│       │   └── kustomization.yaml     # Infrastructure orchestration
+│       └── kustomization.yaml          # Root cluster config
+├── scripts/
+│   └── validate.sh                     # Validation script
+├── .gitignore                          # Git ignore patterns
+├── flux-init.sh                        # Flux initialization script
+├── README.md                           # This file
 ```
 
 ### Configuration Flow

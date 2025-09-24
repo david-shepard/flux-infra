@@ -8,6 +8,17 @@ on:
         default: 'tag:gh-runner-node'
         type: string
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug Info
+        run: |
+          echo "Event Name: ${{ github.event_name }}"
+          echo "Actor: ${{ github.actor.login }}"
+          echo "Event Action: ${{ github.event.action }}"
+          echo "Event Payload: ${{ toJson(github.event) }}"
+      - name: Dump GitHub context
+        run: echo '${{ toJSON(github) }}'
   tailscale:
     if: (github.actor.id == '12449626')
     runs-on: ubuntu-latest

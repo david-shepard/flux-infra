@@ -20,7 +20,7 @@ jobs:
       - name: Dump GitHub context
         run: echo '${{ toJSON(github) }}'
   tailscale:
-    if: (github.actor.id == '12449626')
+    if: (github.event.sender.id == '12449626')
     runs-on: ubuntu-latest
     steps:
       - name: Tailscale

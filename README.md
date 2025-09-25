@@ -1,5 +1,5 @@
 # Flux K3s Example 
-This repo is used to illustrate a FluxCD-managed, GitOps-based Kubernetes cluster (k3s) on Oracle Cloud free tier. Currently it's just one master node but we use Tailscale to address the nodes so expanding the cluster across regions should be straightforward with the [TailScale Kubernetes operator?](https://tailscale.com/kb/1236/kubernetes-operator) (see [TailScale Github Action](./github/workflows/tailscale.yml)).  It attempts modern cloud-native practices including declarative infrastructure management, automated deployments, and continuous reconciliation.
+This repo is used to illustrate a FluxCD-managed, GitOps-based Kubernetes cluster (k3s) on Oracle Cloud free tier. Currently it's just one master node but we use Tailscale to address the nodes so expanding the cluster across regions should be straightforward with the [TailScale Kubernetes operator](https://tailscale.com/kb/1236/kubernetes-operator) (see [TailScale Github Action](./github/workflows/tailscale.yml)).  It attempts modern cloud-native practices including declarative infrastructure management, automated deployments, and continuous reconciliation.
 
 ## TODO
 

@@ -35,10 +35,10 @@ This repository implements a **GitOps workflow** where:
 - **OCI repositories provide artifact-based deployments** for applications
 
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────────┐
-│   Git Repository │────│   Flux CD        │────│  Oracle K3s Cluster │
-│   (This Repo)   │    │   Controllers    │    │                     │
-└─────────────────┘    └──────────────────┘    └─────────────────────┘
+┌──────────────────┐     ┌──────────────────┐    ┌─────────────────────┐
+│   Git Repository │──── │   Flux CD        │────│  Oracle K3s         │
+│   (This Repo)    │     │   Controllers    │    │  Cluster            │
+└──────────────────┘     └──────────────────┘    └─────────────────────┘
          │                       │                        │
          │                       │                        │
     ┌────▼────┐             ┌────▼────┐              ┌────▼────┐

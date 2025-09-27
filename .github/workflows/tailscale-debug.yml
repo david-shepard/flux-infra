@@ -1,4 +1,4 @@
-name: Connect to Tailscale Tailnet
+name: Connect to Tailscale k8 cluster (debug)
 on:
   workflow_dispatch:
     inputs:

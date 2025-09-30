@@ -45,6 +45,10 @@ This repository implements a **GitOps workflow** where:
     │ Config  │             │ Control │              │ Workload│
     └─────────┘             └─────────┘              └─────────┘
 ```
+**Diagram**
+Built with [KubeDiagram](https://github.com/philippemerle/KubeDiagrams) and [generate-kubediagram.yml](./github/workflows/generate-kubediagram.yml) GitHub Action
+
+![Diagram of k8 cluster](https://raw.githubusercontent.com/david-shepard/flux-infra/refs/heads/main/kubediagram.png)
 
 ## 🚀 Quick Start
 

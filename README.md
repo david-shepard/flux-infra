@@ -48,7 +48,7 @@ This repository implements a **GitOps workflow** where:
 **Diagram**
 
 > [!NOTE]
-> Generated diagram using [KubeDiagram](https://github.com/philippemerle/KubeDiagrams) and [Github Action](.github/workflows/kustomize-verify.yml) 
+> Generated diagram using [KubeDiagram](https://github.com/philippemerle/KubeDiagrams) and [Github Action](.github/workflows/generate-kubediagram.yml) 
 
 ![Diagram of k8 cluster](https://raw.githubusercontent.com/david-shepard/flux-infra/refs/heads/main/kubediagram.png)
 

@@ -18,7 +18,7 @@ This repo is used to illustrate a FluxCD-managed, GitOps-based Kubernetes cluste
 - [ ] **Policy as Code**: [OPA Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/) or [Kyverno](https://kyverno.io/) for compliance
 - [ ] **Disaster Recovery**: Backup and restore procedures
 - [ ] **Advanced Observability**: Distributed tracing and log aggregation
-- **Progressive Delivery**: 
+- [ ] **Progressive Delivery**: 
   - [ ] [Flagger](https://flagger.app/) for canary deployments
   - [ ] Promotion pipeline w/ [Kargo](https://kargo.io/)
 

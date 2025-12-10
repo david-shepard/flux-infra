@@ -1,0 +1,79 @@
+# Gitleaks configuration for detecting secrets
+title = "Gitleaks Configuration for Flux Infrastructure"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "github-pat"
+description = "GitHub Personal Access Token"
+regex = '''ghp_[0-9a-zA-Z]{36}'''
+tags = ["key", "github", "pat"]
+
+[[rules]]
+id = "github-fine-grained-pat"
+description = "GitHub Fine-Grained Personal Access Token"
+regex = '''github_pat_[0-9a-zA-Z_]{82}'''
+tags = ["key", "github", "pat"]
+
+[[rules]]
+id = "github-oauth"
+description = "GitHub OAuth Access Token"
+regex = '''gho_[0-9a-zA-Z]{36}'''
+tags = ["key", "github"]
+
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["key", "aws"]
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)api[_-]?key[_-]?[=:]\s*['"]?[0-9a-zA-Z]{32,}['"]?'''
+tags = ["key", "api"]
+
+[[rules]]
+id = "private-key"
+description = "Private SSH/RSA Key"
+regex = '''-----BEGIN (RSA|DSA|EC|OPENSSH) PRIVATE KEY-----'''
+tags = ["key", "private"]
+
+[[rules]]
+id = "kubeconfig"
+description = "Kubernetes Config"
+regex = '''apiVersion:\s*v1\s*kind:\s*Config'''
+tags = ["key", "kubernetes"]
+[rules.allowlist]
+paths = [
+  '''clusters/dev/infra/gotk-components\.yaml''',  # Flux components template
+  '''\.gitleaks\.toml''',  # This file
+]
+
+[[rules]]
+id = "tailscale-auth-key"
+description = "Tailscale Auth Key"
+regex = '''tskey-[a-zA-Z0-9]{32,}'''
+tags = ["key", "tailscale"]
+
+# Allowlist for known false positives
+[allowlist]
+description = "Allowlisted files and patterns"
+paths = [
+  '''README\.md''',  # Documentation
+  '''SECURITY\.md''',  # Security documentation
+  '''.github/workflows/''',  # Workflows reference secrets properly
+  '''scripts/validate\.sh''',  # Validation script
+]
+
+# Don't flag GitHub secrets syntax in workflows
+regexes = [
+  '''\$\{\{\s*secrets\.\w+\s*\}\}''',  # GitHub Actions secrets syntax
+  '''example-key-here''',  # Placeholder text
+]
+
+# Paths to ignore entirely
+[[allowlist.paths]]
+regex = '''kubediagram\.png'''
+description = "Generated diagram file"

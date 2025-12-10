@@ -1,18 +1,34 @@
 # Flux K3s Example 
 This repo is used to illustrate a FluxCD-managed, GitOps-based Kubernetes cluster (k3s) on Oracle Cloud free tier. Currently it's just one master node but we use Tailscale to address the nodes so expanding the cluster across regions should be straightforward with the [TailScale Kubernetes operator](https://tailscale.com/kb/1236/kubernetes-operator) (see [TailScale Github Action](./github/workflows/tailscale.yml)).  It attempts modern cloud-native practices including declarative infrastructure management, automated deployments, and continuous reconciliation.
 
+## Security
+
+This repository implements security best practices to protect against GitHub PAT attacks, supply chain vulnerabilities, and cross-cloud lateral movement as documented in [Wiz's security research](https://www.wiz.io/blog/github-attacks-pat-control-plane).
+
+📋 **[Security Policy](SECURITY.md)** - Security controls, threat model, and best practices
+📊 **[Security Assessment](SECURITY_ASSESSMENT.md)** - Detailed security audit and findings
+
+### Key Security Features
+
+- ✅ **No PAT usage** - Uses scoped `GITHUB_TOKEN` instead of Personal Access Tokens
+- ✅ **Pinned GitHub Actions** - All actions pinned to commit SHAs to prevent supply chain attacks
+- ✅ **Automated secret scanning** - Gitleaks integration for detecting leaked credentials
+- ✅ **Minimal permissions** - All workflows follow principle of least privilege
+- ✅ **Dependency updates** - Dependabot configured for automated security updates
+
 ## TODO
 
 - [x] **Add UI [gimlet/capacitor-ui](https://github.com/gimlet-io/capacitor)**
 - [x] **Implement [podinfo](https://github.com/stefanprodan/podinfo)** microservice application
-- [ ] Add Traefik ingress 
+- [x] **Security Hardening**: GitHub Actions security, secret scanning, supply chain protection
+- [ ] Add Traefik ingress
 - [x] Add requesite configuration for **Tailscale**
   - [ ] [TailScale Kubernetes operator?](https://tailscale.com/kb/1236/kubernetes-operator)
 - [ ] **Multi-Environment Support**: Add staging and production overlays
 - [ ] **Secrets Management**: Implement SOPS or External Secrets Operator
 - [ ] **Monitoring Stack**: Deploy Prometheus, Grafana, and AlertManager
 - [ ] **Image Update Automation**: Automated container image updates
-- [ ] **Security Hardening**: Network policies, Pod Security Standards, admission controllers
+- [ ] **Advanced Security**: Network policies, Pod Security Standards, admission controllers
 
 ### Longer Term...
 - [ ] **Policy as Code**: [OPA Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/) or [Kyverno](https://kyverno.io/) for compliance
@@ -278,6 +294,23 @@ kubectl get secret flux-system -n flux-system -o yaml
 - **Regional Deployment**: Single availability domain deployment
 - **Cost Optimization**: Resource requests tuned for free tier
 
+## 🔒 Security
+
+Security is a top priority for this project. We've implemented comprehensive security controls to protect against:
+
+- **GitHub PAT attacks** and credential theft
+- **Supply chain attacks** targeting GitHub Actions
+- **Secret exposure** in code repositories
+- **Cross-cloud lateral movement** from GitHub to cloud infrastructure
+
+For detailed information, see:
+- **[SECURITY.md](SECURITY.md)** - Security policy, controls, and vulnerability reporting
+- **[SECURITY_ASSESSMENT.md](SECURITY_ASSESSMENT.md)** - Complete security audit report
+
+### Reporting Security Issues
+
+**DO NOT** open public issues for security vulnerabilities. Instead, email repository maintainers with details.
+
 ## 🤝 Contributing
 
 ### Getting Started
@@ -286,6 +319,15 @@ kubectl get secret flux-system -n flux-system -o yaml
 3. Bootstrap Flux pointing to your fork
 4. Make changes and test them
 5. Submit a Pull Request with clear description
+
+### Security Requirements for Contributors
+
+Before submitting a PR, ensure:
+- ✅ No secrets or credentials committed
+- ✅ GitHub Actions pinned to commit SHAs
+- ✅ Minimal workflow permissions requested
+- ✅ Security implications documented
+- ✅ Pre-commit validation passes
 
 ### Code Standards
 - **Kustomize**: Use proper base/overlay patterns

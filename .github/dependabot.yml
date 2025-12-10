@@ -1,0 +1,39 @@
+# Dependabot configuration for automated dependency updates
+# This helps maintain security by keeping GitHub Actions and other dependencies current
+
+version: 2
+updates:
+  # GitHub Actions - Keep workflow dependencies updated
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "security"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    reviewers:
+      - "david-shepard"
+    # Group all GitHub Actions updates into a single PR
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  # Docker images in workflows (if any)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "security"

@@ -1,0 +1,15 @@
+# CODEOWNERS file for automated review requests
+# These owners will be the default reviewers for all changes
+
+# Security-sensitive files require thorough review
+/SECURITY.md @david-shepard
+/.github/workflows/* @david-shepard
+/.gitleaks.toml @david-shepard
+
+# Infrastructure as Code
+/clusters/** @david-shepard
+/apps/** @david-shepard
+
+# CI/CD and automation
+/.github/** @david-shepard
+/scripts/** @david-shepard

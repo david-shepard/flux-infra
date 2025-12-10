@@ -7,31 +7,37 @@ on:
         required: false
         default: 'tag:gh-runner-node'
         type: string
+
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
 
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
+      # Minimal permissions: read contents + write for commit
       contents: write
 
     steps:
-
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: ${{ github.head_ref }}
-          token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
+          # SECURITY: Use GITHUB_TOKEN instead of PAT to minimize attack surface
+          # PATs provide broader access and are high-value targets for attackers
+          token: ${{ secrets.GITHUB_TOKEN }}
 
 
       - name: Configure Tailscale
-        uses: tailscale/github-action@v3
+        uses: tailscale/github-action@4e7234defdc1e8d49e5bbdd9c2f3cc96c30d9c30 # v3.0.0
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
           tags: ${{ inputs.tags }}
+
       - name: Configure Kubeconfig
-        uses: azure/k8s-set-context@v4
+        uses: azure/k8s-set-context@3e0aec4d115d9666fbb0e9c78ed9faa4b3114785 # v4.0.0
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
@@ -42,6 +48,8 @@ jobs:
         run: |
           kubectl get all -A -o yaml > manifest.yaml
       - name: "Generate diagram from Kubernetes manifest"
+        # SECURITY WARNING: This action uses @main which is mutable
+        # TODO: Pin to specific commit SHA once stable release is available
         uses: philippemerle/KubeDiagrams@main
         with:
           type: "kubernetes"
@@ -51,7 +59,7 @@ jobs:
 
       # Commit & add back kubediagram.png (https://github.com/stefanzweifel/git-auto-commit-action)
       - name: Add back changed files
-        uses: stefanzweifel/git-auto-commit-action@v6
+        uses: stefanzweifel/git-auto-commit-action@0049e3fa4059ca715255fbbcb7dea4516f02ce0a # v6.0.0
         with:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"

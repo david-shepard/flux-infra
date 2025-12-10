@@ -7,6 +7,10 @@ on:
         required: false
         default: 'tag:gh-runner-node'
         type: string
+
+permissions:
+  contents: read
+
 jobs:
   debug:
     runs-on: ubuntu-latest
@@ -24,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Tailscale
-        uses: tailscale/github-action@v3
+        uses: tailscale/github-action@4e7234defdc1e8d49e5bbdd9c2f3cc96c30d9c30 # v3.0.0
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}

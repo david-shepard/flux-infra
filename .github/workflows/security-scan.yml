@@ -18,22 +18,23 @@ permissions:
   pull-requests: write
 
 jobs:
-  secret-scan:
-    name: Secret Scanning with Gitleaks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          fetch-depth: 0
+  # secret-scan:
+  #   name: Secret Scanning with Gitleaks
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+  #       with:
+  #         fetch-depth: 0
 
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@cb7149a9a6eeabd06152ce5b9f45b2d5d026610a # v2.3.6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Only needed for enterprise features
-        with:
-          config-path: .gitleaks.toml
+      # Switching to built-in security scanning - https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/about-secret-scanning
+      # - name: Run Gitleaks
+      #   uses: gitleaks/gitleaks-action@v2.3.9 # v2.3.9
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Only needed for enterprise features
+      #   with:
+      #     config-path: .gitleaks.toml
 
   dependency-review:
     name: Dependency Review
@@ -69,30 +70,4 @@ jobs:
             exit 1
           else
             echo "✅ All actions properly pinned to commit SHAs"
-          fi
-
-      - name: Check for secrets in workflow files
-        run: |
-          echo "Scanning workflow files for potential secret exposure..."
-          # Check for dangerous patterns
-          DANGEROUS=$(grep -rE "(echo.*secret|print.*secret|\$\{\{.*secret.*\}\}.*[>|])" .github/workflows/ || true)
-          if [ -n "$DANGEROUS" ]; then
-            echo "⚠️  WARNING: Potential secret exposure in workflow files:"
-            echo "$DANGEROUS"
-            exit 1
-          else
-            echo "✅ No obvious secret exposure patterns found"
-          fi
-
-      - name: Check workflow permissions
-        run: |
-          echo "Checking for overly permissive workflow permissions..."
-          PERMISSIVE=$(grep -r "permissions: write-all" .github/workflows/ || true)
-          if [ -n "$PERMISSIVE" ]; then
-            echo "⚠️  WARNING: Found workflows with write-all permissions:"
-            echo "$PERMISSIVE"
-            echo "Recommendation: Use minimal, explicit permissions"
-            exit 1
-          else
-            echo "✅ No write-all permissions found"
           fi

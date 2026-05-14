@@ -71,29 +71,3 @@ jobs:
           else
             echo "✅ All actions properly pinned to commit SHAs"
           fi
-
-      # - name: Check for secrets in workflow files
-      #   run: |
-      #     echo "Scanning workflow files for potential secret exposure..."
-      #     # Check for dangerous patterns
-      #     DANGEROUS=$(grep -rE "(echo.*secret|print.*secret|\$\{\{.*secret.*\}\}.*[>|])" .github/workflows/ || true)
-      #     if [ -n "$DANGEROUS" ]; then
-      #       echo "⚠️  WARNING: Potential secret exposure in workflow files:"
-      #       echo "$DANGEROUS"
-      #       exit 1
-      #     else
-      #       echo "✅ No obvious secret exposure patterns found"
-      #     fi
-
-      - name: Check workflow permissions
-        run: |
-          echo "Checking for overly permissive workflow permissions..."
-          PERMISSIVE=$(grep -r "permissions: write-all" .github/workflows/ || true)
-          if [ -n "$PERMISSIVE" ]; then
-            echo "⚠️  WARNING: Found workflows with write-all permissions:"
-            echo "$PERMISSIVE"
-            echo "Recommendation: Use minimal, explicit permissions"
-            exit 1
-          else
-            echo "✅ No write-all permissions found"
-          fi

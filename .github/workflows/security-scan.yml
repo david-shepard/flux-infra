@@ -27,13 +27,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2.3.9 # v2.3.9
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Only needed for enterprise features
-        with:
-          config-path: .gitleaks.toml
+      # Switching to built-in security scanning - https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/about-secret-scanning
+      # - name: Run Gitleaks
+      #   uses: gitleaks/gitleaks-action@v2.3.9 # v2.3.9
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Only needed for enterprise features
+      #   with:
+      #     config-path: .gitleaks.toml
 
   dependency-review:
     name: Dependency Review

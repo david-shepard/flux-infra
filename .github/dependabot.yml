@@ -27,13 +27,13 @@ updates:
           - "*"
 
   # Docker images in workflows (if any)
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-    labels:
-      - "dependencies"
-      - "docker"
-      - "security"
+  # - package-ecosystem: "docker"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #     day: "monday"
+  #     time: "09:00"
+  #   labels:
+  #     - "dependencies"
+  #     - "docker"
+  #     - "security"

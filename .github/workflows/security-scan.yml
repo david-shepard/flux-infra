@@ -59,7 +59,7 @@ jobs:
       - name: Check for unpinned actions
         run: |
           echo "Checking for unpinned GitHub Actions..."
-          UNPINNED=$(grep -r "uses:.*@[^a-f0-9]\{40\}" .github/workflows/ || true)
+          UNPINNED=$(grep -r "uses:.*@" .github/workflows/ | grep -v "@[a-f0-9]\{40\}$" || true)
           if [ -n "$UNPINNED" ]; then
             echo "⚠️  WARNING: Found unpinned actions (not using commit SHA):"
             echo "$UNPINNED"

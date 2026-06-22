@@ -48,9 +48,7 @@ jobs:
         run: |
           kubectl get all -A -o yaml > manifest.yaml
       - name: "Generate diagram from Kubernetes manifest"
-        # SECURITY WARNING: This action uses @main which is mutable
-        # TODO: Pin to specific commit SHA once stable release is available
-        uses: philippemerle/KubeDiagrams@main
+        uses: philippemerle/KubeDiagrams@2206eb0683ab9ed9de791a7850483fd0a0e0f809
         with:
           type: "kubernetes"
           args: "-o kubediagram.png manifest.yaml"

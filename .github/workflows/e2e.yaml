@@ -19,9 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Setup Flux
-        # SECURITY WARNING: This action uses @main which is mutable
-        # TODO: Pin to specific release tag once available
-        uses: fluxcd/flux2/action@main
+        uses: fluxcd/flux2/action@580ef30580ef30c8f2b7be175d81bfe8d966314c6617faf
       - name: Setup Kubernetes
         uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
         with:

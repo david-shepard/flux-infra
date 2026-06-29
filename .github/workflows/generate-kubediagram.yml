@@ -48,7 +48,7 @@ jobs:
         run: |
           kubectl get all -A -o yaml > manifest.yaml
       - name: "Generate diagram from Kubernetes manifest"
-        uses: philippemerle/KubeDiagrams@2206eb0683ab9ed9de791a7850483fd0a0e0f809
+        uses: philippemerle/KubeDiagrams@63fa668d4193cd1be87f984757f5e36fff7ba092
         with:
           type: "kubernetes"
           args: "-o kubediagram.png manifest.yaml"
@@ -57,7 +57,7 @@ jobs:
 
       # Commit & add back kubediagram.png (https://github.com/stefanzweifel/git-auto-commit-action)
       - name: Add back changed files
-        uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v6.0.0
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v6.0.0
         with:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"

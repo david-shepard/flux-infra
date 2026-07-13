@@ -48,7 +48,7 @@ jobs:
         run: |
           kubectl get all -A -o yaml > manifest.yaml
       - name: "Generate diagram from Kubernetes manifest"
-        uses: philippemerle/KubeDiagrams@63fa668d4193cd1be87f984757f5e36fff7ba092
+        uses: philippemerle/KubeDiagrams@311d01f3596155bd3a5a28dadd7e49f8546579f1
         with:
           type: "kubernetes"
           args: "-o kubediagram.png manifest.yaml"
